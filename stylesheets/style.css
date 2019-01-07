@@ -1,0 +1,62 @@
+body {
+	margin:0 0;
+}
+
+input {
+	display: block;
+	margin: 20px auto;
+}
+
+header {
+	background-color: blue;
+	margin: 0 0;
+	padding: 30px;
+}
+
+h1 {
+	color: white;
+	font-size: 3em;
+	margin: 0 0;
+}
+
+h2 {
+	font-size: 2em;
+	margin: 30px;
+	grid-column: 1/2;
+	grid-row: 1/2;
+}
+
+label {
+	display: block;
+	margin: 0 auto;
+	width: 10em;
+	text-align: center;
+}
+
+form {
+	display: block;
+	margin: 100px;
+}
+
+#errormsg {
+	text-align: center;
+	color: red;
+}
+
+#grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 100px auto;
+}
+
+#todo {
+	grid-column: 1/2;
+	grid-row: 2/3;
+	background-color: red;
+}
+
+#todosub {
+	width: 80%;
+	height: 200px;
+
+}
