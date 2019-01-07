@@ -1,7 +1,7 @@
-<?php
-session_start();
-$userlog = $_POST["username"];
-$usermdp = $_POST["password"];
+<?php session_start();
+
+$_SESSION['userlog'] = $userlog = $_POST["username"];
+$_SESSION['usermdp'] = $usermdp = $_POST["password"];
 $servername = "localhost";
 $username = "root";
 $password = "azerty";
@@ -16,6 +16,8 @@ $sql = "SELECT * FROM user WHERE usr_pseudo = '${userlog}' AND usr_mdp = '${user
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+	$row = mysqli_fetch_assoc($result);
+	$_SESSION['id'] = $row['ID'];
 	header('Location: todolist.php');
 }
 else {

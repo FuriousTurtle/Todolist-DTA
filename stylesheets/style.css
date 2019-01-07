@@ -1,5 +1,7 @@
 body {
-	margin:0 0;
+	margin:0 auto;
+	width: 90%;
+	display: block;
 }
 
 input {
@@ -21,7 +23,7 @@ h1 {
 
 h2 {
 	font-size: 2em;
-	margin: 30px;
+	margin-top:30px;
 	grid-column: 1/2;
 	grid-row: 1/2;
 }
@@ -46,17 +48,22 @@ form {
 #grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 100px auto;
+	grid-template-rows: 100px 50px auto;
 }
 
 #todo {
 	grid-column: 1/2;
-	grid-row: 2/3;
+	grid-row: 3/4;
 	background-color: red;
 }
 
 #todosub {
-	width: 80%;
-	height: 200px;
+	width: 500px;
+	height: 100px;
+	resize: none;
+}
 
+#buttongrp {
+	grid-row: 2/3;
+	grid-column: 1/2;
 }
