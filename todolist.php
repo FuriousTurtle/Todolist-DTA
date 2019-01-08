@@ -1,6 +1,5 @@
 <?php session_start(); 
-//$iduser = $_SESSION['id'];
-$iduser = '1';
+$iduser = $_SESSION['id'];
 $userlog = $_SESSION['userlog'];
 $usermdp = $_SESSION['usermdp'];
 ?>
@@ -17,41 +16,38 @@ $usermdp = $_SESSION['usermdp'];
 	</header>
 	<div id="grid">
 		<h2>Liste de vos todolist :</h2>
-		<div id="todo">
-			<p>wouf</p>
-		</div>
 		<!--<div id="buttongrp"><button id="bAfficher">Afficher</button></div>
 		<form id="todoform" method="post" action="todoadd.php">
 		<textarea form="todoform" name="todosub" id="todosub" placeholder="Entrez la tâche à réaliser"></textarea>
 		<input type="submit" name="Ajouter" value="Ajouter">
-		</form> -->
-	</div>
-	<?php echo ${"userlog"}. ',' .${"usermdp"}. ',' .${"iduser"}. '!'?>
-<?php 
+	</form> -->
+</div>
+<?php
 
-$servername = "localhost";
-$username = "root";
-$password = "azerty";
-$dbname = "backend";
+require 'sqlconnect.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-	die("Erreur de connexion à la base de donnée : ".$conn->connect_error);
-}
+$req = $pdo->prepare("SELECT tab_id FROM usertablink WHERE user_id = ?");
+$req->execute(array($iduser['ID']));
+$i = 0;
 
-$sql = "SELECT * FROM usertablink WHERE user_id = '${iduser}'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-//	$row = mysqli_fetch_assoc($result);
-//	$_SESSION['id'] = $row['ID'];
-//	header('Location: todolist.php');
+if ($req->rowCount() > 0){
+	echo "<div id='todo'>";
+	foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $row){
+		//print_r($row);
+		$req2 = $pdo->prepare("SELECT * FROM todolist WHERE ID = ?");
+		$req2->execute(array($row['tab_id']));
+		foreach ($req2->fetchAll(PDO::FETCH_ASSOC) as $row2){
+			$i +=1;
+			print_r($row2);
+			echo "<p class='itemtitre hover todoitem".$i."'>".$row2['list_name']."</p>";
+			echo "<p class='itemdesc todoitem".$i."'>".$row2['list_desc']."</p><br>";
+		}
+	}
+	echo "</div>";
 }
 else {
 	?><script>document.getElementById('todo').innerHTML = '<p>Aucune todolist trouvée !</p>';</script><?php
 }
-
-
 ?>
 </body>
 </html>
